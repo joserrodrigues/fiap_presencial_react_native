@@ -1,6 +1,7 @@
 
 import { StyleSheet, View} from 'react-native';
 import { Provider as PaperProvider,  Paragraph, Switch, Button, FAB} from 'react-native-paper';
+import Test from './src/Screens/Home/HomeController'
 
 export default App = () => {
   return (
@@ -20,7 +21,7 @@ const MainPage = () => {
           marginBottom: 30,
         }}
       >
-        <Paragraph>Botão</Paragraph>
+        <Paragraph>Botão 12313</Paragraph>
         <Button icon="camera" mode="contained" onPress={() => console.log('Pressed')}>
           Press me
         </Button>
