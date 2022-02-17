@@ -1,56 +1,49 @@
 import { StyleSheet } from 'react-native';
+import Colors from '../../Utils/Constants/Colors';
 
 export default StyleSheet.create({
-    mainContainer: {
+    safeAreaView: {
         flex: 1,
         flexDirection: "column",
         justifyContent: 'flex-start',
-        marginTop: 40,
-        marginBottom: 30,
+    },
+    loadingBox: {
+        marginTop: 30,
     },
 
-    topScreen:{
-        flex: 5,
+    containerItem: {
+        marginBottom: 10,
     },
-    bottomScreen:{
-        flex: 2,
-    },
-    item: {
-        aspectRatio: 1,
-        width: '100%',
-        height: '100%',
+
+    textsView: {
         flex: 1,
+        flexDirection: "row",
+        justifyContent: 'flex-start',
+        marginBottom: 2,
     },
-    titlePage:{
-        margin: 20,
-        fontSize: 30,
-        textAlign:'center',
-        color: 'red'
+    textNameStyle: {
+        flexDirection: "row",
+        justifyContent: 'flex-start',
     },
-    textBoxContainer:{
-        flexGrow: 1,
+
+    textTitle: {
+        fontSize: 18,
     },
-    textBlock: {
-        flex:1,
-        margin: 15,
-        borderRadius: 15,
-        borderWidth: 1,
-        borderColor: 'red',
-        padding: 20
+
+    textDetail: {
+        fontSize: 12,
     },
-    bottomButton:{
-        height: 60,
-        flexDirection: 'row',
-        justifyContent: 'space-evenly'
+    imageItem: {
+        width: 50,
+        height: 50,
+        margin: 10,
     },
-    buttonStyle: {
-        backgroundColor: 'red',
-        borderRadius: 10,
-    },
-    buttonContainerStyle: {
-        width: '35%',
-        marginHorizontal: 20,
-        marginVertical: 10,
+    separator: {
+        flex: 1,
+        height: 2,
+        backgroundColor: Colors.separatorColor,
+        marginLeft: 10,
+        marginRight: 10
     }
 
 });

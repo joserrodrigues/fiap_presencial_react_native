@@ -1,46 +1,60 @@
 import React from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
-import { Button } from 'react-native-elements';
-import { Image } from 'react-native-elements'
+import { SafeAreaView, FlatList, View, Text, TouchableHighlight, ActivityIndicator } from 'react-native';
+import { Image } from 'react-native-elements';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import DrawerMenu from '../../Components/DrawerMenu/DrawerMenu';
+import Colors from '../../Utils/Constants/Colors';
+
 import styles from './HomeStyles';
 
-const HomeView = () => {
-    return (
-        <View style={styles.mainContainer}>
-            <View style={styles.topScreen}>
-                <View>
-                    <Text style={styles.titlePage}> Título da Página</Text>
-                </View>
-                <Image
-                    source={{ uri: "https://thecatapi.com/api/images/get?format=src&type=jpg"}}
-                    containerStyle={styles.item}
-                />
-            </View>
-            <View style={styles.bottomScreen}>
-                <View style={styles.textBoxContainer}>
-                    <View style={styles.textBlock}>
-                        <Text>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae semper quis lectus nulla at volutpat diam. Malesuada bibendum arcu vitae elementum curabitur vitae nunc. Nibh sit amet commodo nulla. Massa sed elementum tempus egestas sed sed. Eget sit amet tellus cras. Magna ac placerat vestibulum lectus. Sit amet venenatis urna cursus. Est placerat in egestas erat imperdiet sed euismod nisi. Duis at tellus at urna condimentum mattis. Non blandit massa enim nec. Vestibulum lectus mauris ultrices eros in cursus. Consequat id porta nibh venenatis cras sed felis eget. Nunc mi ipsum faucibus vitae aliquet nec. Sapien nec sagittis aliquam malesuada bibendum arcu. Tristique sollicitudin nibh sit amet. Rhoncus mattis rhoncus urna neque viverra justo nec ultrices. Cursus mattis molestie a iaculis at erat pellentesque adipiscing. Neque ornare aenean euismod elementum nisi quis eleifend quam adipiscing.
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.bottomButton}>
-                    <Button
-                        title="Anterior"
-                        buttonStyle={styles.buttonStyle}
-                        containerStyle={styles.buttonContainerStyle}
-                    />
-                    <Button
-                        title="Próximo"
-                        buttonStyle={styles.buttonStyle}
-                        containerStyle={styles.buttonContainerStyle}
-                    />
-                </View>   
-            </View>
+const HomeView = ({ navigation, dataConnection, isLoading, goToDetail }) => {
 
-         
-            
-        </View>
+    const RenderItem = ({ item }) => {
+
+        return (
+            <TouchableOpacity style={styles.containerItem} onPress={() => goToDetail(item)}>
+                <>
+                    <View style={styles.textsView}>
+                        <View style={styles.imageBox} >
+                            <Image
+                                source={{ uri: item.image }}
+                                containerStyle={styles.imageItem}
+                            />
+                        </View>
+                        <View style={styles.TextBox}>
+                            <View style={styles.textNameStyle}>
+                                <Text style={styles.textTitle}>{item.firstName} {item.lastName}</Text>
+                            </View>
+                            <View style={styles.textNameStyle}>
+                                <Text style={styles.textDetail}>{item.address} - {item.state} - {item.zipCode}</Text>
+                            </View>
+                            <View style={styles.textNameStyle}>
+                                <Text style={styles.textDetail}>{item.jobTitle}</Text>
+                            </View>
+                        </View>
+                    </View>
+                    <View style={styles.separator} />
+                </>
+            </TouchableOpacity>
+        );
+    }
+
+    let loadingBox = null
+    if (isLoading) {
+        loadingBox = (
+            <ActivityIndicator style={styles.loadingBox} size="large" color={Colors.activityColor} />
+        )
+    }
+    return (
+        <SafeAreaView style={styles.safeAreaView}>
+            <DrawerMenu navigation={navigation} />
+            {loadingBox}
+            <FlatList
+                data={dataConnection.persons}
+                renderItem={({ item }) => <RenderItem item={item} />}
+                keyExtractor={item => item.CPF.toString()}
+            />
+        </SafeAreaView>
     );
 };
 
