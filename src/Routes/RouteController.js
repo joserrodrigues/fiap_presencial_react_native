@@ -9,6 +9,8 @@ import { registerRootComponent } from 'expo';
 import Colors from '../Utils/Constants/Colors';
 import HomeController from '../Screens/Home/HomeController';
 import DetailController from '../Screens/Detail/DetailController';
+import MyInfoController from '../Screens/MyInfo/MyInfoController';
+import MyPositionController from '../Screens/MyPosition/MyPositionController';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -29,18 +31,28 @@ function RouteController() {
         return (
             <Stack.Navigator>
                 <Stack.Screen name="Home" component={HomeController}
-                    options={screenOptions} />
+                    options={{ ...screenOptions, title: "Home" }} />
                 <Stack.Screen name="Details" component={DetailController}
-                    options={screenOptions} />
+                    options={{ ...screenOptions, title: "Detalhe" }} />
             </Stack.Navigator>
         );
     }
-
-    // return (
-    //     <NavigationContainer>
-    //         <StackHome />
-    //     </NavigationContainer>
-    // );
+    const StackMyInfo = () => {
+        return (
+            <Stack.Navigator>
+                <Stack.Screen name="MyInfo" component={MyInfoController}
+                    options={{...screenOptions, title: "Minhas Informações"}} />
+            </Stack.Navigator>
+        );
+    }
+    const StackMyPosition = () => {
+        return (
+            <Stack.Navigator>
+                <Stack.Screen name="MyPosition" component={MyPositionController}
+                    options={{...screenOptions, title: "Minha Posição"}} />
+            </Stack.Navigator>
+        );
+    }
 
     return (
         <NavigationContainer>
@@ -48,20 +60,13 @@ function RouteController() {
                 initialRouteName="Main" >
                 <Drawer.Screen name="Main" component={StackHome}
                     options={{ title: 'Main', headerShown: false }} />
-                <Drawer.Screen name="Notifications" component={DetailController}
-                    options={{ title: 'Notifications', headerShown: false }} />
+                <Drawer.Screen name="MyInfo" component={StackMyInfo}
+                    options={{ title: 'Minha Informação', headerShown: false }} />
+                <Drawer.Screen name="MyPosition" component={StackMyPosition}
+                    options={{ title: 'Minha Posição', headerShown: false }} />
             </Drawer.Navigator>
         </NavigationContainer>
     );
-
-    // return (
-    //     <NavigationContainer>
-    //         <Tab.Navigator>
-    //             <Tab.Screen name="HomeTab" component={StackHome} />
-    //             <Tab.Screen name=" NotificationsTab" component={DetailController} />
-    //         </Tab.Navigator>
-    //     </NavigationContainer>
-    // );
 }
 
 

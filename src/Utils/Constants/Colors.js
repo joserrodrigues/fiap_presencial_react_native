@@ -3,6 +3,7 @@ export default Colors = {
     F7: '#F7F7F7',
     Blue: '#3972b5',
     Pink: '#EC5E87',
+    Red: '#fa5757',
     Transparent: 'transparent',
     Black: '#000',
     BlackLine: 'rgba(0, 0, 0, 0.25)',
@@ -16,4 +17,7 @@ export default Colors = {
 
     activityColor: '#fa5757',
     separatorColor: '#ccc',
+
+    cameraIconColor: '#ffffff',
+    backgroundCameraIcon: '#ccc'
 };
