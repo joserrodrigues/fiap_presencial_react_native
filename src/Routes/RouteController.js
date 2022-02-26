@@ -11,12 +11,17 @@ import HomeController from '../Screens/Home/HomeController';
 import DetailController from '../Screens/Detail/DetailController';
 import MyInfoController from '../Screens/MyInfo/MyInfoController';
 import MyPositionController from '../Screens/MyPosition/MyPositionController';
+import LoginController from '../Screens/Login/LoginController';
+
+import store from '../store/stores';
+import { Provider } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
-function RouteController() {
+function MainRouteController() {
 
     let screenOptions = {
         headerShown: true,
@@ -54,20 +59,46 @@ function RouteController() {
         );
     }
 
-    return (
-        <NavigationContainer>
-            <Drawer.Navigator
-                initialRouteName="Main" >
-                <Drawer.Screen name="Main" component={StackHome}
-                    options={{ title: 'Main', headerShown: false }} />
-                <Drawer.Screen name="MyInfo" component={StackMyInfo}
-                    options={{ title: 'Minha Informação', headerShown: false }} />
-                <Drawer.Screen name="MyPosition" component={StackMyPosition}
-                    options={{ title: 'Minha Posição', headerShown: false }} />
-            </Drawer.Navigator>
-        </NavigationContainer>
-    );
+    const userInfo = useSelector((state) => state.loginSaga.userInfo);
+
+    let hasToken = false;
+    if (userInfo !== undefined && userInfo !== null) {
+        hasToken = true;
+    }
+
+    if(!hasToken){
+        return (
+            <NavigationContainer>
+                <Stack.Navigator>
+                    <Stack.Screen name="MyPosition" component={LoginController}
+                        options={{ headerShown: false }} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        )
+    } else {
+        return (
+            <NavigationContainer>
+                <Drawer.Navigator
+                    initialRouteName="Main" >
+                    <Drawer.Screen name="Main" component={StackHome}
+                        options={{ title: 'Main', headerShown: false }} />
+                    <Drawer.Screen name="MyInfo" component={StackMyInfo}
+                        options={{ title: 'Minha Informação', headerShown: false }} />
+                    <Drawer.Screen name="MyPosition" component={StackMyPosition}
+                        options={{ title: 'Minha Posição', headerShown: false }} />
+                </Drawer.Navigator>
+            </NavigationContainer>
+        
+        );
+    }    
 }
 
+function RouteController() {
+    return(
+        <Provider store={store}>
+            <MainRouteController />
+        </Provider>
+    )
+}
 
 export default registerRootComponent(RouteController);

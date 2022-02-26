@@ -3,7 +3,7 @@ import Colors from '../../Utils/Constants/Colors';
 
 export default StyleSheet.create({
     spaceBottom: {
-        marginBottom: 60
+        marginBottom: 20
     },
     msgError: {
         color: Colors.Red,
