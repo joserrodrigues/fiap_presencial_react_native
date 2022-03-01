@@ -11,6 +11,7 @@ const normalizeTranslate = {
     'pt_US': 'pt_BR',
     'pt-BR': 'pt_BR',
     'en-US': 'en_US',
+    'mock': 'pt_BR',
 }
 
 // Aqui setamos os idiomas que o I18N irá dar suporte

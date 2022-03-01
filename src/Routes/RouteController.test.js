@@ -19,7 +19,7 @@ describe('<RouteController />', () => {
             </Provider>
         );
 
-        const login = await waitFor(() => getByText('Login'));
+        const login = await waitFor(() => getByText('Logar'));
         expect(login).toBeTruthy();
     });
 

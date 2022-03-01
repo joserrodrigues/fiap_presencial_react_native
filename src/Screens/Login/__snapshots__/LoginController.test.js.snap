@@ -393,7 +393,7 @@ exports[`<LoginController /> Check Initial Case 1`] = `
                         }
                       }
                     >
-                      Login
+                      Logar
                     </Text>
                   </View>
                 </View>
