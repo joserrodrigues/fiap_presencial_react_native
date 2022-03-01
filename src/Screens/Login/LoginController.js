@@ -5,6 +5,8 @@ import {
 } from '../../store/modules/login/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from "yup";
+import { translate } from '../../Locales/ManageLocales';
+import { useGetToken } from '../../Services/Notification/ManageNotification';
 
 
 const LoginController = () => {
@@ -16,14 +18,17 @@ const LoginController = () => {
     const messageConnection = useSelector((state) => state.loginSaga.messageConnection);
 
     const signInSchema = Yup.object().shape({
-        email: Yup.string().email("E-mail não válido").required("E-mail é obrigatório"),
+        email: Yup.string().email(translate('invalidEmail')).required(translate('requiredEmail')),
 
         password: Yup.string()
-            .required("Senha é obrigatório")
-            .min(4, "Senha é curta - deveria ter ao menos 4 caracteres"),
+            .required(translate('requiredPassword'))
+            .min(4, translate('shortPassword')),
     });
 
-    submitForm = (values) => {
+    submitForm = async (values) => {
+        let token = await useGetToken();
+        console.log("token");
+        console.log(token);
         dispatch(login(values.email,values.password));
     }
     

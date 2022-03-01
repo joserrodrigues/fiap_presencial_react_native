@@ -16,6 +16,7 @@ import LoginController from '../Screens/Login/LoginController';
 import store from '../store/stores';
 import { Provider } from 'react-redux';
 import { useDispatch, useSelector } from 'react-redux';
+import { useManageNofification } from '../Services/Notification/ManageNotification';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -61,6 +62,7 @@ export function MainRouteController() {
     }
 
     const userInfo = useSelector((state) => state.loginSaga.userInfo);
+    useManageNofification();
 
     let hasToken = false;
     if (userInfo !== undefined && userInfo !== null) {

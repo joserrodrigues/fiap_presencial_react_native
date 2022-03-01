@@ -5,6 +5,7 @@ import styles from './LoginStyles';
 import Colors from '../../Utils/Constants/Colors';
 import CommonForm from '../../Components/CommonForm/CommonForm';
 import { Platform } from "react-native";
+import { translate } from '../../Locales/ManageLocales';
 
 const LoginView = ({ signInSchema, isLoading, messageConnection, submitForm }) => {
 
@@ -21,7 +22,7 @@ const LoginView = ({ signInSchema, isLoading, messageConnection, submitForm }) =
     } else {
         buttonBox = (
             <Button
-                title="Login"
+                title={translate('login')}
                 testID='loginButton'
                 buttonStyle={styles.buttonStyle}
                 containerStyle={styles.buttonContainerStyle}
@@ -40,15 +41,15 @@ const LoginView = ({ signInSchema, isLoading, messageConnection, submitForm }) =
     let formListInfo = [
         {
             name: "email",
-            label: "E-mail",
-            placeholder: "E-mail",
+            label: translate('email'),
+            placeholder: translate('email'),
             icon: "envelope",
             secure: false,
         },
         {
             name: "password",
-            label: "Senha",
-            placeholder: "Senha",
+            label: translate('password'),
+            placeholder: translate('password'),
             icon: "lock",
             secure: true,
         }
