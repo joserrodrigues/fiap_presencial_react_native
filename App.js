@@ -1,17 +1,12 @@
-
-import { StyleSheet, View} from 'react-native';
-import { Provider as PaperProvider,  Paragraph, Switch, Button, FAB} from 'react-native-paper';
-import Test from './src/Screens/Home/HomeController'
+import React, { useState } from 'react';
+import { StyleSheet, View, Text, Button } from 'react-native';
 
 export default App = () => {
-  return (
-    <PaperProvider>
-      <MainPage />
-    </PaperProvider>
-  );
-};
 
-const MainPage = () => {
+  const [info, setInfo] = useState("Teste Rubens");
+  const onPressButton = (info) => {
+    setInfo(info);
+  }
   return (
     <View style={styles.container}>
       <View
@@ -21,23 +16,13 @@ const MainPage = () => {
           marginBottom: 30,
         }}
       >
-        <Paragraph>Botão 12313</Paragraph>
-        <Button icon="camera" mode="contained" onPress={() => console.log('Pressed')}>
-          Press me
-        </Button>
-        <Paragraph>Switch</Paragraph>
-        <Switch value={true} />
-        <Paragraph>FAB</Paragraph>
-        <FAB
-          style={styles.fab}
-          small
-          icon="plus"
-          onPress={() => console.log('Pressed')}
-        />
+        <Text>{info}</Text>
+        <Button onPress={() => onPressButton("Teste 2")} title="Teste" testID="buttonID" />
       </View>
     </View>
-  )
-}
+  );
+};
+
 
 const styles = StyleSheet.create({
   container: {
@@ -45,4 +30,3 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
 });
-

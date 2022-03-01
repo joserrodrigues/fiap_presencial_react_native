@@ -36,9 +36,9 @@ export default function getInfo(state = INITIAL_STATE, { type, payload }) {
             }
             case 'login/LoginFinish': {
                 draft.isLoading = false;
-                draft.statusConnection = 0;                
+                draft.statusConnection = 0;
                 draft.userInfo = payload.info;
-                draft.messageConnection = "";
+                draft.messageConnection = "Login com Sucesso";
                 break;
             }
             default:

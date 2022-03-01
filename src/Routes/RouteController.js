@@ -21,32 +21,33 @@ const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
-function MainRouteController() {
+const screenOptions = {
+    headerShown: true,
+    headerStyle: {
+        backgroundColor: Colors.HeaderBackgroundColor,
+    },
+    headerTintColor: Colors.HeaderTintColor,
+    headerLayoutPreset: 'center',
+};
 
-    let screenOptions = {
-        headerShown: true,
-        headerStyle: {
-            backgroundColor: Colors.HeaderBackgroundColor,
-        },
-        headerTintColor: Colors.HeaderTintColor,
-        headerLayoutPreset: 'center',
-    };
+export function StackHome() {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="Home" component={HomeController}
+                options={{ ...screenOptions, title: "Home" }} />
+            <Stack.Screen name="Details" component={DetailController}
+                options={{ ...screenOptions, title: "Detalhe" }} />
+        </Stack.Navigator>
+    );
+}
 
-    const StackHome = () => {
-        return (
-            <Stack.Navigator>
-                <Stack.Screen name="Home" component={HomeController}
-                    options={{ ...screenOptions, title: "Home" }} />
-                <Stack.Screen name="Details" component={DetailController}
-                    options={{ ...screenOptions, title: "Detalhe" }} />
-            </Stack.Navigator>
-        );
-    }
+export function MainRouteController() {
+
     const StackMyInfo = () => {
         return (
             <Stack.Navigator>
                 <Stack.Screen name="MyInfo" component={MyInfoController}
-                    options={{...screenOptions, title: "Minhas Informações"}} />
+                    options={{ ...screenOptions, title: "Minhas Informações" }} />
             </Stack.Navigator>
         );
     }
@@ -54,7 +55,7 @@ function MainRouteController() {
         return (
             <Stack.Navigator>
                 <Stack.Screen name="MyPosition" component={MyPositionController}
-                    options={{...screenOptions, title: "Minha Posição"}} />
+                    options={{ ...screenOptions, title: "Minha Posição" }} />
             </Stack.Navigator>
         );
     }
@@ -66,7 +67,7 @@ function MainRouteController() {
         hasToken = true;
     }
 
-    if(!hasToken){
+    if (!hasToken) {
         return (
             <NavigationContainer>
                 <Stack.Navigator>
@@ -88,13 +89,13 @@ function MainRouteController() {
                         options={{ title: 'Minha Posição', headerShown: false }} />
                 </Drawer.Navigator>
             </NavigationContainer>
-        
+
         );
-    }    
+    }
 }
 
 function RouteController() {
-    return(
+    return (
         <Provider store={store}>
             <MainRouteController />
         </Provider>

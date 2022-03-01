@@ -4,6 +4,7 @@ import { Button } from 'react-native-elements';
 import styles from './LoginStyles';
 import Colors from '../../Utils/Constants/Colors';
 import CommonForm from '../../Components/CommonForm/CommonForm';
+import { Platform } from "react-native";
 
 const LoginView = ({ signInSchema, isLoading, messageConnection, submitForm }) => {
 
@@ -21,9 +22,10 @@ const LoginView = ({ signInSchema, isLoading, messageConnection, submitForm }) =
         buttonBox = (
             <Button
                 title="Login"
+                testID='loginButton'
                 buttonStyle={styles.buttonStyle}
                 containerStyle={styles.buttonContainerStyle}
-                onPress={() => { commonForm.current.submitForm();}}
+                onPress={() => { commonForm.current.submitForm(); }}
             />
         );
         if(messageConnection !== ""){
