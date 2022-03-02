@@ -1,7 +1,6 @@
 import React from 'react';
-import { SafeAreaView, FlatList, View, Text, TouchableHighlight, ActivityIndicator } from 'react-native';
+import { SafeAreaView, FlatList, View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Image } from 'react-native-elements';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import DrawerMenu from '../../Components/DrawerMenu/DrawerMenu';
 import Colors from '../../Utils/Constants/Colors';
 

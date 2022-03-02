@@ -1,10 +1,9 @@
 import 'react-native-gesture-handler';
-import * as React from 'react';
+import React, { useEffect, useState} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { registerRootComponent } from 'expo';
 
 import Colors from '../Utils/Constants/Colors';
 import HomeController from '../Screens/Home/HomeController';
@@ -15,8 +14,11 @@ import LoginController from '../Screens/Login/LoginController';
 
 import store from '../store/stores';
 import { Provider } from 'react-redux';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useManageNofification } from '../Services/Notification/ManageNotification';
+import * as Updates from "expo-updates";
+import LoadingUpdateController from '../Screens/LoadingUpdate/LoadingUpdateController';
+
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -44,6 +46,25 @@ export function StackHome() {
 
 export function MainRouteController() {
 
+    const [hasUpdate, setHasUpdate] = useState(false)
+
+    useEffect(() => {
+        async function updateApp() {
+
+            //*
+                const { isAvailable } = await Updates.checkForUpdateAsync();
+                if (isAvailable) {
+                    setHasUpdate(true);
+                }
+            /*/
+            setTimeout(() => {
+                setHasUpdate(true);
+            }, 2000);
+            //*/
+        }
+        updateApp();
+    }, []);
+
     const StackMyInfo = () => {
         return (
             <Stack.Navigator>
@@ -52,6 +73,7 @@ export function MainRouteController() {
             </Stack.Navigator>
         );
     }
+
     const StackMyPosition = () => {
         return (
             <Stack.Navigator>
@@ -69,7 +91,16 @@ export function MainRouteController() {
         hasToken = true;
     }
 
-    if (!hasToken) {
+    if (hasUpdate) {
+        return (
+            <NavigationContainer>
+                <Stack.Navigator>
+                    <Stack.Screen name="MyPosition" component={LoadingUpdateController}
+                        options={{ headerShown: false }} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        )     
+    } else if (!hasToken) {
         return (
             <NavigationContainer>
                 <Stack.Navigator>
@@ -77,7 +108,7 @@ export function MainRouteController() {
                         options={{ headerShown: false }} />
                 </Stack.Navigator>
             </NavigationContainer>
-        )
+        )        
     } else {
         return (
             <NavigationContainer>
@@ -104,4 +135,4 @@ function RouteController() {
     )
 }
 
-export default registerRootComponent(RouteController);
+export default (RouteController);
